@@ -24,25 +24,25 @@ resource "aws_iam_policy" "external-dns-iam-policy" {
 }
 
 resource "aws_iam_role" "external-dns-iam-role" {
-  name               = "EksExternalDnsIAMRole"
+  name = "EksExternalDnsIAMRole"
   assume_role_policy = jsonencode(
-  {
-    Statement = [
-      {
-        Action    = "sts:AssumeRoleWithWebIdentity"
-        Condition = {
-          StringEquals = {
-            "${var.oidc_host_path}:aud" = "sts.amazonaws.com"
+    {
+      Statement = [
+        {
+          Action = "sts:AssumeRoleWithWebIdentity"
+          Condition = {
+            StringEquals = {
+              "${var.oidc_host_path}:aud" = "sts.amazonaws.com"
+            }
           }
-        }
-        Effect    = "Allow",
-        Principal = {
-          Federated = "arn:aws:iam::${var.account_id}:oidc-provider/${var.oidc_host_path}"
-        }
-      },
-    ]
-    Version   = "2012-10-17"
-  }
+          Effect = "Allow",
+          Principal = {
+            Federated = "arn:aws:iam::${var.account_id}:oidc-provider/${var.oidc_host_path}"
+          }
+        },
+      ]
+      Version = "2012-10-17"
+    }
   )
 }
 
