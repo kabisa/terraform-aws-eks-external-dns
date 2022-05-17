@@ -20,3 +20,9 @@ variable "helm_chart_version" {
   description = "The version of the chart to use. If not specified, will use the latest stable release"
   default     = null
 }
+
+variable "helm_value_files" {
+  type        = list(string)
+  description = "List of values in raw yaml to pass to helm. Values will be merged, in order, as Helm does with multiple -f options"
+  default     = []
+}

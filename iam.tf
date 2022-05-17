@@ -19,12 +19,12 @@ data "aws_iam_policy_document" "policy" {
 }
 
 resource "aws_iam_policy" "external_dns" {
-  name   = "EksExternalDnsIAMPolicy"
+  name   = "${module.label.id}-policy"
   policy = data.aws_iam_policy_document.policy.json
 }
 
 resource "aws_iam_role" "external_dns" {
-  name = "EksExternalDnsIAMRole"
+  name = "${module.label.id}-role"
   assume_role_policy = jsonencode(
     {
       Statement = [
