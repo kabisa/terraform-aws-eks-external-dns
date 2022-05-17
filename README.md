@@ -2,6 +2,8 @@
 
 ## Usage 
 
+**Note:** The complete documentation of this Helm Chart can be found [here](https://github.com/bitnami/charts/tree/master/bitnami/external-dns).
+
 ```hcl
 module "external_dns" {
   source         = "git@github.com:kabisa/terraform-aws-eks-external-dns.git?ref=master" # Pin module to Semver tag to prevent unexpected updates
@@ -13,7 +15,6 @@ module "external_dns" {
   helm_value_files = [file("${path.module}/external-dns-override.yaml")]
 }
 ```
-
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
