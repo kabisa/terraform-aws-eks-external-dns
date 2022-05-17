@@ -18,12 +18,12 @@ data "aws_iam_policy_document" "policy" {
   }
 }
 
-resource "aws_iam_policy" "external-dns-iam-policy" {
+resource "aws_iam_policy" "external_dns" {
   name   = "EksExternalDnsIAMPolicy"
   policy = data.aws_iam_policy_document.policy.json
 }
 
-resource "aws_iam_role" "external-dns-iam-role" {
+resource "aws_iam_role" "external_dns" {
   name = "EksExternalDnsIAMRole"
   assume_role_policy = jsonencode(
     {
@@ -46,7 +46,7 @@ resource "aws_iam_role" "external-dns-iam-role" {
   )
 }
 
-resource "aws_iam_role_policy_attachment" "external-dns-iam-role-policy-attachment" {
-  role       = aws_iam_role.external-dns-iam-role.name
-  policy_arn = aws_iam_policy.external-dns-iam-policy.arn
+resource "aws_iam_role_policy_attachment" "external_dns_role" {
+  role       = aws_iam_role.external_dns.arn
+  policy_arn = aws_iam_policy.external_dns.arn
 }
