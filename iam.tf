@@ -37,7 +37,7 @@ resource "aws_iam_role" "external_dns" {
           }
           Effect = "Allow",
           Principal = {
-            Federated = "arn:aws:iam::${var.account_id}:oidc-provider/${var.oidc_host_path}"
+            Federated = "arn:aws:iam::${local.account_id}:oidc-provider/${var.oidc_host_path}"
           }
         },
       ]
