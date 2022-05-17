@@ -23,6 +23,8 @@ resource "aws_iam_policy" "external_dns" {
   count  = local.enabled ? 1 : 0
   name   = "${module.label.id}-policy"
   policy = data.aws_iam_policy_document.external_dns[0].json
+
+  tags = var.tags
 }
 
 resource "aws_iam_role" "external_dns" {
@@ -47,6 +49,8 @@ resource "aws_iam_role" "external_dns" {
       Version = "2012-10-17"
     }
   )
+
+  tags = var.tags
 }
 
 resource "aws_iam_role_policy_attachment" "external_dns_role" {
