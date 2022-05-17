@@ -17,7 +17,7 @@ resource "helm_release" "external_dns" {
     templatefile(
       "${path.module}/yamls/external-dns-values.yaml",
       {
-        region       = var.region
+        region       = local.region
         aws_role_arn = aws_iam_role.external_dns.arn
       }
     )
