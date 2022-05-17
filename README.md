@@ -84,7 +84,7 @@ module "external_dns" {
 
 | Name | Description |
 |------|-------------|
-| <a name="output_helm_metadata"></a> [helm\_metadata](#output\_helm\_metadata) | n/a |
+| <a name="output_helm_metadata"></a> [helm\_metadata](#output\_helm\_metadata) | Metadata from the Helm release |
 | <a name="output_role_arn"></a> [role\_arn](#output\_role\_arn) | The Amazon Resource Name (ARN) specifying the role |
 | <a name="output_role_id"></a> [role\_id](#output\_role\_id) | The stable and unique string identifying the role |
 | <a name="output_role_name"></a> [role\_name](#output\_role\_name) | The name of the IAM role created |

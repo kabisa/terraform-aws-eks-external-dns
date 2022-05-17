@@ -21,7 +21,7 @@ module "label" {
   context = module.this.context
 }
 resource "helm_release" "external_dns" {
-  count      = local.enabled ? 1 : 0
+  count      = local.enabled ? 2 : 0
   name       = "external-dns"
   namespace  = "kube-system"
   repository = "https://charts.bitnami.com/bitnami"
