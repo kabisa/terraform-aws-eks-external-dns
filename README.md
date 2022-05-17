@@ -1,4 +1,24 @@
 # terraform-aws-eks-external-dns
+
+example: 
+
+```hcl
+module "external-dns" {
+  source         = "git@github.com:kabisa/terraform-aws-eks-external-dns.git?ref=fead1d1"
+  providers = {
+    kubernetes = kubernetes.new_cluster
+    helm       = helm.new_cluster
+  }
+
+  context = module.default_label.context
+  depends_on     = [module.eks_cluster]
+  oidc_host_path = local.oidc_host_path
+
+  helm_value_files = [file("${path.module}/external-dns-values.yaml")]
+}
+```
+
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 

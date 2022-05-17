@@ -1,4 +1,5 @@
 data "aws_iam_policy_document" "policy" {
+  count = local.enabled ? 1 : 0
   statement {
     sid       = ""
     effect    = "Allow"
@@ -19,12 +20,14 @@ data "aws_iam_policy_document" "policy" {
 }
 
 resource "aws_iam_policy" "external_dns" {
+  count  = local.enabled ? 1 : 0
   name   = "${module.label.id}-policy"
-  policy = data.aws_iam_policy_document.policy.json
+  policy = data.aws_iam_policy_document.policy[0].json
 }
 
 resource "aws_iam_role" "external_dns" {
-  name = "${module.label.id}-role"
+  count = local.enabled ? 1 : 0
+  name  = "${module.label.id}-role"
   assume_role_policy = jsonencode(
     {
       Statement = [
@@ -47,6 +50,7 @@ resource "aws_iam_role" "external_dns" {
 }
 
 resource "aws_iam_role_policy_attachment" "external_dns_role" {
-  role       = aws_iam_role.external_dns.name
-  policy_arn = aws_iam_policy.external_dns.arn
+  count      = local.enabled ? 1 : 0
+  role       = aws_iam_role.external_dns[0].name
+  policy_arn = aws_iam_policy.external_dns[0].arn
 }
