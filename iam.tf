@@ -1,4 +1,4 @@
-data "aws_iam_policy_document" "policy" {
+data "aws_iam_policy_document" "external_dns" {
   count = local.enabled ? 1 : 0
   statement {
     sid       = ""
@@ -22,7 +22,7 @@ data "aws_iam_policy_document" "policy" {
 resource "aws_iam_policy" "external_dns" {
   count  = local.enabled ? 1 : 0
   name   = "${module.label.id}-policy"
-  policy = data.aws_iam_policy_document.policy[0].json
+  policy = data.aws_iam_policy_document.external_dns[0].json
 }
 
 resource "aws_iam_role" "external_dns" {

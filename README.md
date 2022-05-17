@@ -1,20 +1,16 @@
-# terraform-aws-eks-external-dns
+# terraform-aws-eks-external-dns [![Latest Release](https://img.shields.io/github/release/kabisa/terraform-aws-eks-external-dns.svg)](https://github.com/kabisa/terraform-aws-eks-external-dns/releases/latest)
 
-example: 
+## Usage 
 
 ```hcl
-module "external-dns" {
-  source         = "git@github.com:kabisa/terraform-aws-eks-external-dns.git?ref=fead1d1"
-  providers = {
-    kubernetes = kubernetes.new_cluster
-    helm       = helm.new_cluster
-  }
+module "external_dns" {
+  source         = "git@github.com:kabisa/terraform-aws-eks-external-dns.git?ref=master" # Pin module to Semver tag to prevent unexpected updates
 
   context = module.default_label.context
   depends_on     = [module.eks_cluster]
-  oidc_host_path = local.oidc_host_path
+  oidc_host_path = var.oidc_host_path
 
-  helm_value_files = [file("${path.module}/external-dns-values.yaml")]
+  helm_value_files = [file("${path.module}/external-dns-override.yaml")]
 }
 ```
 
@@ -52,7 +48,7 @@ module "external-dns" {
 | [aws_iam_role_policy_attachment.external_dns_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [helm_release.external_dns](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
-| [aws_iam_policy_document.policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.external_dns](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
 
 ## Inputs
@@ -85,5 +81,11 @@ module "external-dns" {
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_helm_metadata"></a> [helm\_metadata](#output\_helm\_metadata) | n/a |
+| <a name="output_role_arn"></a> [role\_arn](#output\_role\_arn) | The Amazon Resource Name (ARN) specifying the role |
+| <a name="output_role_id"></a> [role\_id](#output\_role\_id) | The stable and unique string identifying the role |
+| <a name="output_role_name"></a> [role\_name](#output\_role\_name) | The name of the IAM role created |
+| <a name="output_role_policy"></a> [role\_policy](#output\_role\_policy) | Role policy document in json format |
 <!-- END_TF_DOCS -->
