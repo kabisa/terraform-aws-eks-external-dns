@@ -19,6 +19,6 @@ output "role_policy" {
 }
 
 output "helm_metadata" {
-  value       = join("", helm_release.external_dns.*.metadata)
+  value       = helm_release.external_dns[0].metadata[0]
   description = "Metadata from the Helm release"
 }
