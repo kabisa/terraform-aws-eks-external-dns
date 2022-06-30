@@ -4,7 +4,7 @@ resource "helm_release" "external-dns" {
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "external-dns"
   version    = "6.5.6"
-  # appVersion: 0.7.6
+  # appVersion: 0.12.0
 
   values = [
     templatefile(
