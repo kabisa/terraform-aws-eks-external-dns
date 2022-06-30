@@ -1,9 +1,9 @@
-resource "helm_release" "aws-load-balancer-controller" {
+resource "helm_release" "external-dns" {
   name       = "external-dns"
   namespace  = "kube-system"
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "external-dns"
-  version    = "4.8.3"
+  version    = "6.5.6"
   # appVersion: 0.7.6
 
   values = [
