@@ -3,7 +3,7 @@ resource "helm_release" "external-dns" {
   namespace  = "kube-system"
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "external-dns"
-  version    = "6.20.4"
+  version    = "7.1.0"
   # appVersion: 2.2.3
 
   values = [
